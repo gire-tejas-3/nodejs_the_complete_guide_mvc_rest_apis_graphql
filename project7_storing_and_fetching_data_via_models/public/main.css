@@ -1,0 +1,73 @@
+html{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+body{
+    background-color: rgb(195, 182, 255);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+}
+
+h1, h2{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+}
+
+button{
+    background-color: rgb(60, 155, 233);
+    color: white;
+    padding: 10px 30px;
+    border: 1px solid blue;
+    border-radius: 4px;
+    box-shadow: 4px 2px 2px 0 rgba(0, 0, 0, 0.4);
+}
+
+header{
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: rgb(190, 252, 243);
+    padding: 20px 50px;
+}
+
+header nav ul{
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+    margin: 0;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a{
+    color: black;
+    font-weight: 900;
+    text-decoration: none;
+}
+
+.container{
+    margin: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

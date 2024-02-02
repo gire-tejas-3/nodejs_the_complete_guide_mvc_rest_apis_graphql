@@ -1,0 +1,42 @@
+body{
+    background-color: rgb(226, 234, 241);
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+}
+
+button{
+    background-color: rgb(110, 162, 204);
+}
+
+header{
+    position: sticky;
+    top: 0;
+    left: 0;
+    margin-bottom: 50px;
+    background-color: rgb(213, 190, 252);
+    padding: 20px 50px;
+}
+
+header nav ul{
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+    margin: 0;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a{
+    color: black;
+    font-weight: 900;
+    text-decoration: none;
+}

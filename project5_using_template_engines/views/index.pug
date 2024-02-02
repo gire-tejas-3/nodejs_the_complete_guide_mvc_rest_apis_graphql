@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title #{title} 
+        link(rel="stylesheet", href="/main.css")
+    body 
+        header
+            nav
+                ul 
+                    li 
+                        a(href="/") Home 
+                    li 
+                        a(href="/product") Products 
+                    li 
+                        a(href="/product/add") Add Products 
+
+        main 
+            div.container 
+                h1 Welcome to Shop
+                
+                if product.length > 0
+                    each prod in product 
+                        p #{prod.product}
+                else 
+                    h1 No Products
