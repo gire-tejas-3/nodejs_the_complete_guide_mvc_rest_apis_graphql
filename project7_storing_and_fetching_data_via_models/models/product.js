@@ -15,13 +15,17 @@ module.exports = class Product {
         let products = [];
         fs.readFile(dataPath, (err, data) => {
             if (!err) {
-                products = JSON.parse(data);
+                if (data.length > 0) {
+                    products = JSON.parse(data);
+                }
+                products.push(this);
+                // it will write data in json file
+                fs.writeFile(dataPath, JSON.stringify(products), (error) => {
+                    console.log(error);
+                });
+            } else {
+                console.log("Error Reading File: " + err);
             }
-            products.push(this);
-            // it will write data in json file
-            fs.writeFile(dataPath, JSON.stringify(products), (error) => {
-                console.log(error);
-            });
         });
     }
 
@@ -29,6 +33,9 @@ module.exports = class Product {
         // fetch all data from json file
         fs.readFile(dataPath, (err, content) => {
             if (err) {
+                return cb([]);
+            }
+            if (content.length === 0) {
                 return cb([]);
             }
             cb(JSON.parse(content));
