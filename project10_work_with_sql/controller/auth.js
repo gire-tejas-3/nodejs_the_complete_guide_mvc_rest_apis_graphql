@@ -1,4 +1,3 @@
-const Register = require('../model/register');
 const User = require('../model/user');
 
 exports.getRegister = (req, res, next) => {
