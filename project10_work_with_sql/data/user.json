@@ -1,0 +1,18 @@
+[
+	{
+		"id": 1,
+		"terms": "accepted",
+		"username": "giretejas",
+		"email": "giretejas@gmail.com",
+		"password": "giretejas@gmail.com",
+		"role": "admin"
+	},
+	{
+		"terms": "accepted",
+		"username": "test",
+		"email": "test@test.com",
+		"password": "test@test.com",
+		"role": "user",
+		"id": 4809
+	}
+]
