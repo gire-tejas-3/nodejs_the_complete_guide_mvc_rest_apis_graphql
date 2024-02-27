@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('includes/head.ejs') %>
+<body>
+	<div id="app">
+		<%- include('includes/sidebar.ejs') %>
+		<div id="main">
+			<%- include('includes/nav.ejs') %>
+			<div class="main-content container-fluid">
+				<div class="page-title">
+					<div class="row">
+						<div class="col-12 col-md-6 order-md-1 order-last">
+							<h3>Add Employee</h3>
+						</div>
+						<div class="col-12 col-md-6 order-md-2 order-first">
+							<nav aria-label="breadcrumb" class="breadcrumb-header">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item">
+										<a href="/" class="text-success">Dashboard</a>
+									</li>
+									<li class="breadcrumb-item active" aria-current="page">
+										Add Employee
+									</li>
+								</ol>
+							</nav>
+						</div>
+					</div>
+				</div>
+
+				<!-- // Basic multiple Column Form section start -->
+				<section id="multiple-column-form">
+					<div class="row match-height">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-content">
+									<div class="card-body">
+										<form class="form" action="/employees/add" method="post">
+											<div class="row">
+												<div class="col-md-6 col-12">
+													<div class="form-group has-icon-left">
+														<label for="employeeId">ID
+															Number</label>
+														<div class="position-relative">
+															<input type="text" class="form-control"
+																placeholder="id number" id="employeeId"
+																name="employeeId" disabled="true"
+																value="" />
+															<div class="form-control-icon">
+																<i class="fa fa-hash"></i>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-6 col-12">
+													<div class="form-group has-icon-left">
+														<label for="gender">Gender</label>
+														<div class="position-relative">
+															<fieldset class="form-group">
+																<select class="form-select"
+																	id="gender" name="gender">
+																	<option disabled selected>
+																		Select Gender
+																	</option>
+																	<option value="male">
+																		Male
+																	</option>
+																	<option value="female">
+																		Female
+																	</option>
+																</select>
+															</fieldset>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-4 col-12">
+													<div class="form-group has-icon-left">
+														<label for="firstname">First
+															Name</label>
+														<div class="position-relative">
+															<input type="text" class="form-control"
+																placeholder="first name"
+																id="firstname"
+																name="firstname" />
+															<div class="form-control-icon">
+																<i class="fa fa-user"></i>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-4 col-12">
+													<div class="form-group has-icon-left">
+														<label for="middlename">Middle
+															Name</label>
+														<div class="position-relative">
+															<input type="text" class="form-control"
+																placeholder="middle name"
+																id="middlename"
+																name="middlename" />
+															<div class="form-control-icon">
+																<i class="fa fa-user"></i>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-4 col-12">
+													<div class="form-group has-icon-left">
+														<label for="lastname">Last
+															Name</label>
+														<div class="position-relative">
+															<input type="text" class="form-control"
+																placeholder="last name"
+																id="lastname"
+																name="lastname" />
+															<div class="form-control-icon">
+																<i class="fa fa-user"></i>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-2 col-12">
+													<div class="form-group has-icon-left">
+														<label for="dob">Date of Birth</label>
+														<div class="position-relative">
+															<input type="date" class="form-control"
+																placeholder="DOB" id="dob" />
+															<div class="form-control-icon">
+																<i class="fa fa-user"></i>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-2 col-12">
+													<div class="form-group has-icon-left">
+														<label for="email">Email</label>
+														<div class="position-relative">
+															<input type="text" class="form-control"
+																placeholder="email" id="email"  name="email"/>
+															<div class="form-control-icon">
+																<i class="fa fa-envelope"></i>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-2 col-12">
+													<div class="form-group has-icon-left">
+														<label for="contact">Contact</label>
+														<div class="position-relative">
+															<input type="text" class="form-control"
+																placeholder="contact"
+																id="contact" name="contact" />
+															<div class="form-control-icon">
+																<i class="fa fa-phone"></i>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-2 col-12">
+													<div class="form-group has-icon-left">
+														<label for="pofileImage">Profile</label>
+														<div class="position-relative">
+															<input type="file" class="form-control"
+																placeholder="" id="pofileImage" name="pofileImage" />
+															<div class="form-control-icon">
+																<i class="fa fa-user"></i>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-6 col-12">
+													<div class="form-group">
+														<label for="department">Deapartment</label>
+														<fieldset class="form-group">
+															<select class="form-select" id="department" name="department">
+																<option value="it">
+																	IT
+																</option>
+																<option value="engg">
+																	ENGINEERING
+																</option>
+																<option value="hr">
+																	HR
+																</option>
+															</select>
+														</fieldset>
+													</div>
+												</div>
+												<div class="col-md-6 col-12">
+													<div class="form-group">
+														<label for="designation">Designation</label>
+														<fieldset class="form-group">
+															<select class="form-select" id="designation">
+																<option value="it">
+																	IT
+																</option>
+																<option value="hr">
+																	HR
+																</option>
+															</select>
+														</fieldset>
+													</div>
+												</div>
+												<div class="col-12 d-flex justify-content-end">
+													<button type="submit" class="btn btn-primary me-1 mb-1">
+														Submit
+													</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<!-- // Basic multiple Column Form section end -->
+			</div>
+		</div>
+	</div>
+	<%- include('includes/end.ejs') %>
+</body>
+</html>
