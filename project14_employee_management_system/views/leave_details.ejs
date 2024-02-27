@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+	<%- include('includes/head.ejs') %>
+   <body>
+      <div id="app">
+         <%- include('includes/sidebar.ejs') %>
+         <div id="main">
+            <%- include('includes/nav.ejs') %>
+				<div class="main-content container-fluid">
+					<div class="page-title">
+						<h3>Leave Details</h3>
+					</div>
+					<section id="basic-vertical-layouts">
+						<div class="row match-height">
+							<div class="col-md-12 col-12">
+								<div class="card">
+									<div class="card-content">
+										<div class="card-body">
+											<form class="form form-vertical">
+												<div class="form-body">
+													<div class="row">
+														<div class="col-12">
+															<table
+																class="table"
+																id="table1"
+															>
+																<tbody>
+																	<tr>
+																		<td>
+																			<b
+																				>Full
+																				Name:</b
+																			>
+																			John
+																			Doe
+																		</td>
+																		<td>
+																			<b
+																				>Age:</b
+																			>
+																			23
+																		</td>
+																		<td>
+																			<b
+																				>Gender:</b
+																			>
+																			Male
+																		</td>
+																	</tr>
+																	<tr>
+																		<td>
+																			<b
+																				>Leave
+																				Type:</b
+																			>
+																			Sick
+																			Leave
+																		</td>
+																		<td>
+																			<b
+																				>Leave
+																				Date:</b
+																			>
+																			05-23-
+																			to
+																			05-25-2021
+																		</td>
+																		<td>
+																			<b
+																				>Posting
+																				Date:</b
+																			>
+																			05-23-2021
+																		</td>
+																	</tr>
+																	<tr>
+																		<td>
+																			<b
+																				>Leave
+																				Status:</b
+																			>
+																			pending
+																		</td>
+																		<td></td>
+																		<td></td>
+																	</tr>
+																	<tr>
+																		<td>
+																			<b
+																				>Admin
+																				Remark:</b
+																			>
+																			waiting
+																			for
+																			approval
+																		</td>
+																		<td></td>
+																		<td></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+
+														<div
+															class="col-12 d-flex justify-content-end"
+														>
+															<button
+																type="submit"
+																class="btn btn-primary me-1 mb-1"
+															>
+																Approve
+															</button>
+															<button
+																type="submit"
+																class="btn btn-primary me-1 mb-1"
+															>
+																Not Approve
+															</button>
+														</div>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+					<!-- // Basic Vertical form layout section end -->
+				</div>
+			</div>
+		</div>
+      <%- include('includes/end.ejs') %>
+	</body>
+</html>

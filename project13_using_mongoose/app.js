@@ -35,14 +35,11 @@ app.use((req, res, next) => {
 	res.render('404.ejs', { title: 'Page Not Found' });
 });
 
-mongoose
-	.connect(mongoUri)
-	.then((result) => {
-		console.log('DB Connected!');
-		app.listen(port, hostname, () => {
-			console.log(`App is running on http://${hostname}:${port}`);
-		});
-	})
-	.catch((error) => {
-		console.log('DB Connection Error: ' + error);
+mongoose.connect(mongoUri).then(result => {
+	console.log("DB Connected!")
+	app.listen(port, hostname, () => {
+		console.log(`App is running on http://${hostname}:${port}`);
 	});
+}).catch(error => {
+	console.log("DB Connection Error: " + error)
+});
