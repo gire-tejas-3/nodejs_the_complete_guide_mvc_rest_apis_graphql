@@ -105,6 +105,21 @@
 																</div>
 															</div>
 														</div>
+														<div class="col-12">
+															<div class="form-group has-icon-left">
+																<label for="designation">Department</label>
+																<div class="position-relative">
+																	<select class="form-control" name="department" id="department">
+																		<% for(let department of departments) { %>
+																			<option value="<%= department._id %>"><%= department.departmentName %></option>
+																		<% } %>
+																	</select>
+																	<div class="form-control-icon">
+																		<i class="fa fa-user"></i>
+																	</div>
+																</div>
+															</div>
+														</div>
 
 														<div
 															class="col-12 d-flex justify-content-end"

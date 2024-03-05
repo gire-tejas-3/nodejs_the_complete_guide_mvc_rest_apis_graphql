@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 	<%- include('includes/head.ejs') %>
-   <body>
-      <div id="app">
-         <%- include('includes/sidebar.ejs') %>
-         <div id="main">
-            <%- include('includes/nav.ejs') %>
+
+	<body>
+		<div id="app">
+			<%- include('includes/sidebar.ejs') %>
+			<div id="main">
+				<%- include('includes/nav.ejs') %>
 				<div class="main-content container-fluid">
 					<div class="page-title">
 						<h3>Leave Details</h3>
@@ -16,110 +17,94 @@
 								<div class="card">
 									<div class="card-content">
 										<div class="card-body">
-											<form class="form form-vertical">
-												<div class="form-body">
-													<div class="row">
-														<div class="col-12">
-															<table
-																class="table"
-																id="table1"
-															>
-																<tbody>
-																	<tr>
-																		<td>
-																			<b
-																				>Full
-																				Name:</b
-																			>
-																			John
-																			Doe
-																		</td>
-																		<td>
-																			<b
-																				>Age:</b
-																			>
-																			23
-																		</td>
-																		<td>
-																			<b
-																				>Gender:</b
-																			>
-																			Male
-																		</td>
-																	</tr>
-																	<tr>
-																		<td>
-																			<b
-																				>Leave
-																				Type:</b
-																			>
-																			Sick
-																			Leave
-																		</td>
-																		<td>
-																			<b
-																				>Leave
-																				Date:</b
-																			>
-																			05-23-
-																			to
-																			05-25-2021
-																		</td>
-																		<td>
-																			<b
-																				>Posting
-																				Date:</b
-																			>
-																			05-23-2021
-																		</td>
-																	</tr>
-																	<tr>
-																		<td>
-																			<b
-																				>Leave
-																				Status:</b
-																			>
-																			pending
-																		</td>
-																		<td></td>
-																		<td></td>
-																	</tr>
-																	<tr>
-																		<td>
-																			<b
-																				>Admin
-																				Remark:</b
-																			>
-																			waiting
-																			for
-																			approval
-																		</td>
-																		<td></td>
-																		<td></td>
-																	</tr>
-																</tbody>
-															</table>
-														</div>
-
-														<div
-															class="col-12 d-flex justify-content-end"
+											<div class="form-body">
+												<div class="row">
+													<div class="col-12">
+														<table
+															class="table"
+															id="table1"
 														>
+															<tbody>
+																<tr>
+																	<td>
+																		<b>Full Name: </b>
+																		<%= `${leaves.userId.firstname} ${leaves.userId.middlename} ${leaves.userId.lastname}` %>
+																	</td>
+																	<td>
+																		<b>Email: </b>
+																		<%= leaves.userId.email %>
+																	</td>
+																	<td>
+																		<b>Applied Date: </b>
+																		<%= moment(leaves.appliedDate).format('DD MMM YYYY') %>
+																	</td>
+																</tr>
+																<tr>
+																	<td>
+																		<b>Department:</b>
+																		<%= leaves.userId.designation.departmentId.departmentName %>
+																	</td>
+																	<td>
+																		<b>Designation: </b>
+																		<%= leaves.userId.designation.designation %>
+																	</td>
+																	<td>
+																		<b>Leave status:</b>
+																		<%= leaves.status.toUpperCase() %>
+																	</td>
+																</tr>
+																<tr>
+																	<td>
+																		<b>Description:</b>
+																		<%= leaves.description %>
+																	</td>
+																	<td></td>
+																	<td></td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+
+													<div
+														class="col-12 d-flex justify-content-end"
+													>
+														<form
+															action="/leaves/<%= leaves._id %>"
+															method="post"
+														>
+															<input
+																type="hidden"
+																name="status"
+																id="status"
+																value="approved"
+															/>
 															<button
 																type="submit"
 																class="btn btn-primary me-1 mb-1"
 															>
 																Approve
 															</button>
+														</form>
+														<form
+															action="/leaves/<%= leaves._id %>"
+															method="post"
+														>
+															<input
+																type="hidden"
+																name="status"
+																id="status"
+																value="rejected"
+															/>
 															<button
 																type="submit"
 																class="btn btn-primary me-1 mb-1"
 															>
-																Not Approve
+																Reject
 															</button>
-														</div>
+														</form>
 													</div>
 												</div>
-											</form>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -130,6 +115,6 @@
 				</div>
 			</div>
 		</div>
-      <%- include('includes/end.ejs') %>
+		<%- include('includes/end.ejs') %>
 	</body>
 </html>

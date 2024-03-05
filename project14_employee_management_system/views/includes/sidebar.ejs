@@ -6,15 +6,13 @@
 		</div>
 		<div class="sidebar-menu">
 			<ul class="menu">
-				<li class="sidebar-item active">
-					<a href="/" class="sidebar-link">
-						<i class="fa fa-home text-success"></i>
-						<span>Dashboard</span>
-					</a>
-				</li>
-
 				<% if(user.role === 'admin') { %>
-					<!-- Admin -->
+					<li class="sidebar-item active">
+						<a href="/dashboard" class="sidebar-link">
+							<i class="fa fa-home text-success"></i>
+							<span>Dashboard</span>
+						</a>
+					</li>
 					<li class="sidebar-item has-sub">
 						<a href="#" class="sidebar-link">
 							<i class="fa fa-building text-success"></i>
@@ -113,13 +111,19 @@
 							</li>
 						</ul>
 					</li>
-					<li class="sidebar-item">
+					<!-- <li class="sidebar-item">
 						<a href="/reports" class="sidebar-link">
 							<i class="fa fa-chart-bar text-success"></i>
 							<span>Reports</span>
 						</a>
-					</li>
+					</li> -->
 				<% } else { %>
+					<li class="sidebar-item active">
+						<a href="/" class="sidebar-link">
+							<i class="fa fa-home text-success"></i>
+							<span>Dashboard</span>
+						</a>
+					</li>
 					<!-- user -->
 					<li class="sidebar-item">
 						<a href="/leave/apply" class="sidebar-link">

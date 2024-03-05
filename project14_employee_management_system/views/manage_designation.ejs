@@ -36,8 +36,9 @@
 								<table class="table" id="table1">
 									<thead>
 										<tr>
-											<th>designation Name</th>
+											<th>Designation Name</th>
 											<th>Description</th>
+											<th>Department</th>
 											<th>Creation Date</th>
 											<th>Action</th>
 										</tr>
@@ -55,6 +56,11 @@
 														<input class="invisible-input" type="text"
 															name="description" id="description"
 															value="<%= design.description %>">
+													</td>
+													<td>
+														<select class="form-control" name="department" id="department">
+																<option value="<%= design.departmentId._id %>"><%= design.departmentId.departmentName %></option>
+														</select>
 													</td>
 													<td>
 														<%= moment(design.createdAt).locale('en-in').format('DD MMM YYYY h:mm A') %>

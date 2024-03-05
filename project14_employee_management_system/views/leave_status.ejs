@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('includes/head.ejs') %>
+	<%- include('includes/head.ejs') %>
 	<body>
-        <div id="app">
-            <%- include('includes/sidebar.ejs') %>
-            <div id="main">
-                <%- include('includes/nav.ejs') %>
+		<div id="app">
+			<%- include('includes/sidebar.ejs') %>
+			<div id="main">
+				<%- include('includes/nav.ejs') %>
 				<div class="main-content container-fluid">
 					<div class="page-title">
 						<div class="row">
@@ -20,7 +20,7 @@
 									<ol class="breadcrumb">
 										<li class="breadcrumb-item">
 											<a
-												href="index.html"
+												href="/"
 												class="text-success"
 												>Dashboard</a
 											>
@@ -39,38 +39,40 @@
 					<section class="section">
 						<div class="card">
 							<div class="card-body">
-								<table class="table" id="table1">
-									<thead>
-										<tr>
-											<th>Leave Type</th>
-											<th>From</th>
-											<th>To</th>
-											<th>Posting Date</th>
-											<th>Remark</th>
-											<th>Status</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Casual Leave</td>
-											<td>2021-11-02</td>
-											<td>2021-11-05</td>
-											<td>2021-11-01</td>
-											<td>waiting for approval</td>
-											<td>
-												<span class="badge bg-info"
-													>Pending</span
-												>
-											</td>
-										</tr>
-									</tbody>
-								</table>
+								<% if(leaves.length === 0) { %>
+									<p>No Leaves Found!</p>
+								<% } else { %>
+									<table class="table" id="table1">
+										<thead>
+											<tr>
+												<th>Leave Type</th>
+												<th>From</th>
+												<th>To</th>
+												<th>Status</th>
+											</tr>
+										</thead>
+										<tbody>
+											<% for(let leave of leaves) { %>
+												<tr>
+													<td><%= leave.leaveType.leaveType %></td>
+													<td><%= moment(leave.fromDate).format('LLLL') %></td>
+													<td><%= moment(leave.toDate).format('LLLL') %></td>
+													<td>
+														<span class="badge <%= leave.status === 'approved' ? 'bg-success': leave.status === 'rejected' ? 'bg-danger' : 'bg-info' %>"
+															><%= leave.status.toUpperCase() %></span
+														>
+													</td>
+												</tr>
+											<% } %>
+										</tbody>
+									</table>
+								<% } %>
 							</div>
 						</div>
 					</section>
 				</div>
 			</div>
 		</div>
-        <%- include('includes/end.ejs') %>
+		<%- include('includes/end.ejs') %>
 	</body>
 </html>

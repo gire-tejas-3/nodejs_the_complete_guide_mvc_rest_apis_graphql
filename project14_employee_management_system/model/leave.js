@@ -18,10 +18,19 @@ const LeaveSchema = new Schema({
         type: Date,
         required:  true,
     },
+    status :{
+        type:String,
+        default: 'pending',
+        enum: ['pending', 'approved', 'rejected']
+    },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
+    appliedDate: {
+        type: Date,
+        default: Date.now()
+    }
 });
 
 module.exports = mongoose.model('Leave', LeaveSchema);

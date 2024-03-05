@@ -1,9 +1,10 @@
 const moment = require('moment');
 const Designation = require('../../model/designation');
+const Departments = require('../../model/departments');
 
 exports.getAllDesignations = (req, res, next) => {
 	const user = req.user || req.locals.user;
-	Designation.find()
+	Designation.find().populate('departmentId')
 		.then((result) => {
 			res.render('manage_designation', {
 				title: 'Designations',
@@ -19,14 +20,21 @@ exports.getAllDesignations = (req, res, next) => {
 
 exports.getAddDesignation = (req, res, next) => {
 	const user = req.user || req.locals.user;
-	res.render('add_designation', {
-		title: 'Add Designations',
-		user,
-	});
+	Departments.find()
+		.then((result) => {
+			res.render('add_designation', {
+				title: 'Add Designations',
+				user,
+				departments: result
+			});
+		})
+		.catch((error) => {
+			console.log(error);
+		});
 };
 
 exports.postAddDesignation = (req, res, next) => {
-	const { designation, description } = req.body;
+	const { department, designation, description } = req.body;
 	Designation.findOne({ designation })
 		.then((result) => {
 			if (result) {
@@ -35,6 +43,7 @@ exports.postAddDesignation = (req, res, next) => {
 			}
 
 			const design = new Designation({
+				departmentId: department,
 				designation: designation,
 				description: description,
 			});
