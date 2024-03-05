@@ -1,4 +1,37 @@
+const User = require('../../model/user');
+const Leave = require('../../model/leave');
+
 exports.getDashboard = (req, res, next) => {
 	const user = req.user || req.locals.user;
-	res.render('admin', { title: 'Home', user });
-}
+	User.countDocuments({ role: 'user' })
+		.then((employees) => {
+			Leave.find()
+				.then((result) => {
+					const totalLeave = result.length;
+					const approvedLeave = result.filter(
+						(leave) => leave.status === 'approved',
+					).length;
+					const rejectedLeave = result.filter(
+						(leave) => leave.status === 'rejected',
+					).length;
+					const pendingLeave = result.filter(
+						(leave) => leave.status === 'pending',
+					).length;
+					res.render('admin', {
+						title: 'Home',
+						user,
+						employees,
+						totalLeave,
+						approvedLeave,
+						rejectedLeave,
+						pendingLeave,
+					});
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		})
+		.catch((error) => {
+			console.log(error);
+		});
+};

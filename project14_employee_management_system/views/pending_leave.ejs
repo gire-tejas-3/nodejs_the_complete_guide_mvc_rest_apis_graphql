@@ -1,44 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('includes/head.ejs') %>
-	<body>
-        <div id="app">
-            <%- include('includes/sidebar.ejs') %>
-			<div id="main">
-                <%- include('includes/nav.ejs') %>
-				<div class="main-content container-fluid">
-					<div class="page-title">
-						<div class="row">
-							<div class="col-12 col-md-6 order-md-1 order-last">
-								<h3>Pending</h3>
-							</div>
-							<div class="col-12 col-md-6 order-md-2 order-first">
-								<nav
-									aria-label="breadcrumb"
-									class="breadcrumb-header"
-								>
-									<ol class="breadcrumb">
-										<li class="breadcrumb-item">
-											<a
-												href="index.html"
-												class="text-success"
-												>Dashboard</a
-											>
-										</li>
-										<li
-											class="breadcrumb-item active"
-											aria-current="page"
+<%- include('includes/head.ejs') %>
+<body>
+	<div id="app">
+		<%- include('includes/sidebar.ejs') %>
+		<div id="main">
+			<%- include('includes/nav.ejs') %>
+			<div class="main-content container-fluid">
+				<div class="page-title">
+					<div class="row">
+						<div class="col-12 col-md-6 order-md-1 order-last">
+							<h3>Pending Leaves</h3>
+						</div>
+						<div class="col-12 col-md-6 order-md-2 order-first">
+							<nav
+								aria-label="breadcrumb"
+								class="breadcrumb-header"
+							>
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item">
+										<a
+											href="/"
+											class="text-success"
+											>Dashboard</a
 										>
-											Pending
-										</li>
-									</ol>
-								</nav>
-							</div>
+									</li>
+									<li
+										class="breadcrumb-item active"
+										aria-current="page"
+									>
+										Pending Leaves
+									</li>
+								</ol>
+							</nav>
 						</div>
 					</div>
-					<section class="section">
-						<div class="card">
-							<div class="card-body">
+				</div>
+				<section class="section">
+					<div class="card">
+						<div class="card-body">
+							<% if(leaves.length ===0) { %>
+								<p>No Leaves Found</p>
+							<% } else { %>
 								<table class="table" id="table1">
 									<thead>
 										<tr>
@@ -50,82 +53,34 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td>John Doe</td>
-											<td>Sick Leave</td>
-											<td>2021-11-01</td>
-											<td>
-												<span class="badge bg-info"
-													>Pending</span
-												>
-											</td>
-											<td>
-												<a href="editDesignation.php"
-													><i
-														class="fa fa-eye text-success"
-													></i
-												></a>
-											</td>
-										</tr>
-										<tr>
-											<td>Juan Dela Cruz</td>
-											<td>Sick Leave</td>
-											<td>2021-11-01</td>
-											<td>
-												<span class="badge bg-info"
-													>Pending</span
-												>
-											</td>
-											<td>
-												<a href="editDesignation.php"
-													><i
-														class="fa fa-eye text-success"
-													></i
-												></a>
-											</td>
-										</tr>
-										<tr>
-											<td>Cardo Dalisay</td>
-											<td>Medical Leave</td>
-											<td>2021-11-01</td>
-											<td>
-												<span class="badge bg-info"
-													>Pending</span
-												>
-											</td>
-											<td>
-												<a href="editDesignation.php"
-													><i
-														class="fa fa-eye text-success"
-													></i
-												></a>
-											</td>
-										</tr>
-										<tr>
-											<td>John Doe</td>
-											<td>Sick Leave</td>
-											<td>2021-11-01</td>
-											<td>
-												<span class="badge bg-info"
-													>Pending</span
-												>
-											</td>
-											<td>
-												<a href="editDesignation.php"
-													><i
-														class="fa fa-eye text-success"
-													></i
-												></a>
-											</td>
-										</tr>
+										<% for (let leave of leaves) { %>
+											<tr>
+												<td><%= `${leave.userId.firstname} ${leave.userId.middlename} ${leave.userId.lastname}` %></td>
+												<td><%= leave.leaveType.leaveType %></td>
+												<td><%= moment(leave.appliedDate).format('LLLL') %></td>
+												<td>
+													<span 
+														class="badge <%= leave.status === 'approved' ? 'bg-success' : leave.status === 'rejected' ? 'bg-danger' : 'bg-info'  %>"
+													><%= leave.status.toUpperCase() %></span>
+												</td>
+												<td>
+													<a href="/leaves/<%= leave._id %>"
+														><i
+															class="fa fa-eye text-success"
+														></i
+													></a>
+												</td>
+											</tr>
+										<% } %>
 									</tbody>
 								</table>
-							</div>
+							<% } %>
 						</div>
-					</section>
-				</div>
+					</div>
+				</section>
 			</div>
 		</div>
-        <%- include('includes/end.ejs') %>
-	</body>
+	</div>
+	<%- include('includes/end.ejs') %>
+</body>
 </html>

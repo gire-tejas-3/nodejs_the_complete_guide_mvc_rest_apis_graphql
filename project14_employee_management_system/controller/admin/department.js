@@ -1,5 +1,6 @@
 const moment = require('moment');
 const Departments = require('../../model/departments');
+const Designations = require('../../model/designation');
 
 // Department Contollers
 exports.getAllDepartments = (req, res, next) => {
@@ -51,14 +52,21 @@ exports.deleteDepartment = (req, res, next) => {
 
 exports.getAddDepartments = (req, res, next) => {
 	const user = req.user || req.locals.user;
-	res.render('add_department', {
-		title: 'Add Department',
-		user,
-	});
+	Designations.find()
+		.then((result) => {
+			res.render('add_department', {
+				title: 'Add Department',
+				user,
+				designations: result,
+			});
+		})
+		.catch((error) => {
+			console.log(error);
+		});
 };
 
 exports.postAddDepartments = (req, res, next) => {
-	const { departmentAbbr, departmentName } = req.body;
+	const { designation ,departmentAbbr, departmentName } = req.body;
 	Departments.findOne({ departmentName })
 		.then((result) => {
 			if (result) {
@@ -67,6 +75,7 @@ exports.postAddDepartments = (req, res, next) => {
 			}
 
 			const department = new Departments({
+				designations: designation,
 				departmentName: departmentName,
 				departmentAbbr: departmentAbbr,
 			});

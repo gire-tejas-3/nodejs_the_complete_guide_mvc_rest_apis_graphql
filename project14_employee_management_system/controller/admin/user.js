@@ -19,13 +19,12 @@ exports.getAllUsers = (req, res, next) => {
 
 exports.getAddUsers = (req, res, next) => {
 	const user = req.user || req.locals.user;
-	Promise.all([Departments.find(), Designation.find()])
-		.then(([departments, designations]) => {
+	Designation.find().populate('departmentId')
+		.then(result => {
 			res.render('add_user', {
 				title: 'Add Users',
 				user,
-				departments,
-				designations,
+				designations: result
 			});
 		})
 		.catch((error) => {
@@ -115,13 +114,12 @@ exports.getAddUser = (req, res, next) => {
 		return res.redirect('/account')
 	};
 
-	Promise.all([User.findById(id), Departments.find(), Designation.find()])
-		.then(([users, departments, designations]) => {
+	Promise.all([User.findById(id), Designation.find().populate('departmentId')])
+		.then(([users, designations]) => {
 			res.render('update_user', {
 				title: 'Update User',
 				user,
 				users,
-				departments,
 				designations,
 			});
 		})

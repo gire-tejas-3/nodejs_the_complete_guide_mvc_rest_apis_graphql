@@ -10,6 +10,10 @@ const DepartmentSchema = new Schema({
 		type: String,
 		required: true,
 	},
+	designation: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Designation'
+	},
     createdAt: {
         type: Date,
         default: Date.now(),

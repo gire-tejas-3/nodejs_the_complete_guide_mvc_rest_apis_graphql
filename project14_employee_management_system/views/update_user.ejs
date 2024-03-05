@@ -165,8 +165,8 @@
 														<label for="department">Department</label>
 														<div class="position-relative">
 															<select class="form-control" name="department" id="department" required>
-																<% for(let department of departments) { %>
-																	<option value="<%= department._id %>"><%= department.departmentName %></option>
+																<% for(let designation of designations) { %>
+																	<option value="<%= designation.departmentId._id %>"><%= designation.departmentId.departmentName	 %></option>
 																<% } %>
 															</select>
 															<div class="form-control-icon">
