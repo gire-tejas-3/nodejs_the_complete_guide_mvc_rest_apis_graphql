@@ -1,20 +1,18 @@
 const User = require('../model/user');
 
 const protectedRoutes = function (req, res, next) {
-	const cookieKey = process.env.COOKIE_KEY;
-	const value = req.cookies[`${cookieKey}`];
-
-	if (!value) {
-		res.clearCookie(cookieKey);
-		return res.redirect('/login');
+	if (!req.session.user || !req.session.user._id) {
+		res.redirect('/login');
+		return;
 	}
 
-	User.findOne({ username: value })
+	User.findById(req.session.user._id)
 		.then((result) => {
 			if (!result) {
-				res.clearCookie(cookieKey);
-				res.redirect('/login');
-				return;
+				res.session.destroy((err) => {
+					if (err) console.log(err);
+					res.redirect('/login');
+				});
 			} else {
 				req.user = result;
 				if (!req.locals) {
@@ -23,7 +21,7 @@ const protectedRoutes = function (req, res, next) {
 
 				req.locals.user = result;
 
-				return next();
+				next();
 			}
 		})
 		.catch((error) => {

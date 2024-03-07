@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const router = require('./routes/index');
+const session = require('express-session');
+const MongoStore   = require('connect-mongodb-session')(session); 
 const mongoose = require('mongoose');
 
 dotenv.config();
@@ -18,6 +20,11 @@ mongoUri = mongoUri
 	.replace('<password>', process.env.MONGODB_PASSWORD)
 	.replace('<dbName>', process.env.MONGODB_DBNAME);
 
+const store = new MongoStore({
+	uri: mongoUri,
+	collection: 'sessions',
+})
+
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 
@@ -27,6 +34,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
+app.use(
+	session({
+		secret: process.env.SESSION_SECURE_KEY,
+		resave: false,
+		saveUninitialized: false,
+		store: store
+	}),
+);
 
 app.use(router);
 

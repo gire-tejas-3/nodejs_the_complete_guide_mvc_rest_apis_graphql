@@ -20,13 +20,15 @@ exports.postRegister = (req, res, next) => {
 	}
 
 	if (
-		!password.match(/^(?!.*\s)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}[\]:;<>,.?~\\-]).{8,16}$/)
+		!password.match(
+			/^(?!.*\s)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}[\]:;<>,.?~\\-]).{8,16}$/,
+		)
 	) {
 		console.log(
 			'Password Should Contain At least one digit, At least one lowercase letter, at least one uppercase letter, at least one special character, not less than 8 characters and not exceed 16 characters',
 		);
 		return res.redirect('/register');
-	}	
+	}
 
 	User.findOne({ username: userName, email: email })
 		.then((result) => {
@@ -71,12 +73,14 @@ exports.postLogin = (req, res, next) => {
 				return res.redirect('/login');
 			}
 
-			res.cookie(process.env.COOKIE_KEY, username, {
-				maxAge: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
-				httpOnly: true,
-			});
+			req.session.isLoggedIn = true;
+			req.session.user = result;   
 			console.log('Logged in Successfully!!!');
-			return res.redirect('/');
+			if (result.role === 'admin') {
+				return res.redirect('/dashboard');
+			} else {
+				return res.redirect('/');
+			}
 		})
 		.catch((error) => {
 			console.log(error);
@@ -84,6 +88,8 @@ exports.postLogin = (req, res, next) => {
 };
 
 exports.logout = (req, res, next) => {
-	res.clearCookie(process.env.COOKIE_KEY);
-	res.redirect('/login');
+	req.session.destroy((err) => {
+		if(err) console.log(err);
+		res.redirect('/login');
+	});
 };
