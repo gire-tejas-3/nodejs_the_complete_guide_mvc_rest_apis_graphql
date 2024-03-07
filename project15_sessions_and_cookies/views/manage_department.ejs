@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('includes/head.ejs') %>
+<body>
+	<div id="app">
+		<%- include('includes/sidebar.ejs') %>
+		<div id="main">
+			<%- include('includes/nav.ejs') %>
+			<div class="main-content container-fluid">
+				<div class="page-title">
+					<div class="row">
+						<div class="col-12 col-md-6 order-md-1 order-last">
+							<h3>Manage Department</h3>
+						</div>
+						<div class="col-12 col-md-6 order-md-2 order-first">
+							<nav aria-label="breadcrumb" class="breadcrumb-header">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item">
+										<a href="/" class="text-success">Dashboard</a>
+									</li>
+									<li class="breadcrumb-item active" aria-current="page">
+										Manage Department
+									</li>
+								</ol>
+							</nav>
+						</div>
+					</div>
+				</div>
+				<section class="section">
+					<div class="card">
+						<div class="card-body">
+							<% if(departments.length===0) { %>
+								<p>No Departments Found</p>
+							<% } else { %>
+								<table class="table" id="table1">
+									<thead>
+										<tr>
+											<th>Department Name</th>
+											<th>Department Short Name</th>
+											<th>Created At</th>
+											<th>Last Updated At</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<% for(let dept of departments) { %>
+											<form method="post" action="/department/<%= dept._id %>">
+												<tr>
+													<td>
+														<input class="invisible-input" type="text"
+															name="departmentName" id="departmentName"
+															value="<%= dept.departmentName %>">
+													</td>
+													<td>
+														<input type="text" class="invisible-input"
+															name="departmentAbbr" id="departmentAbbrs"
+															value="<%= dept.departmentAbbr %>">
+													</td>
+													<td>
+														<%= moment(dept.createdAt).locale('en-in').format('DD MMM YYYY h:mm A') %>
+													</td>
+													<td>
+														<%= dept.updatedAt?
+														moment(dept.updatedAt).locale('en-in').format('DD MMM YYYY h:mm A'): "" %>
+													</td>
+													<td>
+														<button class="btn" type="submit">
+															<i class="fa fa-pen text-success"></i>
+														</button>
+														
+														<button class="btn" type="submit" formaction="/department/<%= dept._id %>/delete" formmethod="post">
+															<i class="fa fa-trash text-danger"></i>
+														</button>															
+													</td>
+												</tr>
+											</form>
+										<% } %>
+									</tbody>
+								</table>
+							<% } %>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+	<%- include('includes/end.ejs') %>
+</body>
+</html>
