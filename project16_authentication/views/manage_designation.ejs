@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('includes/head.ejs') %>
+
+<body>
+	<div id="app">
+		<%- include('includes/sidebar.ejs') %>
+		<div id="main">
+			<%- include('includes/nav.ejs') %>
+			<div class="main-content container-fluid">
+				<div class="page-title">
+					<div class="row">
+						<div class="col-12 col-md-6 order-md-1 order-last">
+							<h3>Manage designation</h3>
+						</div>
+						<div class="col-12 col-md-6 order-md-2 order-first">
+							<nav aria-label="breadcrumb" class="breadcrumb-header">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item">
+										<a href="/" class="text-success">Dashboard</a>
+									</li>
+									<li class="breadcrumb-item active" aria-current="page">
+										Manage designation
+									</li>
+								</ol>
+							</nav>
+						</div>
+					</div>
+				</div>
+				<section class="section">
+					<div class="card">
+						<div class="card-body">
+							<% if(designations.length===0) { %>
+								<p>No Designaion Found</p>
+							<% } else { %>
+								<table class="table" id="table1">
+									<thead>
+										<tr>
+											<th>Designation Name</th>
+											<th>Description</th>
+											<th>Department</th>
+											<th>Creation Date</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<% for(let design of designations) { %>
+											<form method="post" action="/designation/<%= design._id %>">
+												<tr>
+													<td>
+														<input class="invisible-input" type="text"
+															name="designation" id="designation"
+															value="<%= design.designation %>">
+													</td>
+													<td>
+														<input class="invisible-input" type="text"
+															name="description" id="description"
+															value="<%= design.description %>">
+													</td>
+													<td>
+														<select class="form-control" name="department" id="department">
+																<option value="<%= design.departmentId._id %>"><%= design.departmentId.departmentName %></option>
+														</select>
+													</td>
+													<td>
+														<%= moment(design.createdAt).locale('en-in').format('DD MMM YYYY h:mm A') %>
+													</td>
+													<input type="hidden" name="_csrf" value="<%= csrfToken %>">
+													<td>
+														
+														<button class="btn" type="submit">
+															<i class="fa fa-pen text-success"></i>
+														</button>
+														
+														<button class="btn" type="submit" formaction="/designation/<%= design._id %>/delete" formmethod="post">
+															<i class="fa fa-trash text-danger"></i>
+														</button>	
+													</td>
+												</tr>
+											</form>
+										<% } %>	
+									</tbody>
+								</table>
+							<% } %>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+	<%- include('includes/end.ejs') %>
+</body>
+
+</html>
