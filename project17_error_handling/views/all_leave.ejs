@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('includes/head.ejs') %>
+<body>
+	<div id="app">
+		<%- include('includes/sidebar.ejs') %>
+		<div id="main">
+			<%- include('includes/nav.ejs') %>
+			<div class="main-content container-fluid">
+				<div class="page-title">
+					<div class="row">
+						<div class="col-12 col-md-6 order-md-1 order-last">
+							<h3>Leave Application</h3>
+						</div>
+						<div class="col-12 col-md-6 order-md-2 order-first">
+							<nav
+								aria-label="breadcrumb"
+								class="breadcrumb-header"
+							>
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item">
+										<a
+											href="/"
+											class="text-success"
+											>Dashboard</a
+										>
+									</li>
+									<li
+										class="breadcrumb-item active"
+										aria-current="page"
+									>
+										Leave Application
+									</li>
+								</ol>
+							</nav>
+						</div>
+					</div>
+				</div>
+				<section class="section">
+					<div class="card">
+						<div class="card-body">
+							<% if(!leaves || leaves.length === 0) { %>
+								<p>No Leaves Found</p>
+							<% } else { %>
+								<table class="table" id="table1">
+									<thead>
+										<tr>
+											<th>Full Name</th>
+											<th>Leave Type</th>
+											<th>Posting Date</th>
+											<th>Status</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<% for (let leave of leaves) { %>
+											<tr>
+												<td><%= `${leave.userId.firstname || ''} ${leave.userId.middlename || ''} ${leave.userId.lastname || ''}` %></td>
+												<td><%= leave.leaveType.leaveType || '' %></td>
+												<td><%= moment(leave.appliedDate).format('LLLL') || '' %></td>
+												<td>
+													<span 
+														class="badge <%= leave.status === 'approved' ? 'bg-success' : leave.status === 'rejected' ? 'bg-danger' : 'bg-info'  %>"
+													><%= leave.status.toUpperCase() || '' %></span>
+												</td>
+												<td>
+													<a href="/leaves/<%= leave._id %>"
+														><i
+															class="fa fa-eye text-success"
+														></i
+													></a>
+												</td>
+											</tr>
+										<% } %>
+									</tbody>
+								</table>
+							<% } %>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+	<%- include('includes/end.ejs') %>
+</body>
+</html>
