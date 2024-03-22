@@ -75,6 +75,12 @@ const UserSchema = new Schema({
 		enum: [true, false],
 		default: true,
 	},
+	accessToken: {
+		type: String,
+	},
+	refreshToken: {
+		type: String,
+	},
 });
 
 UserSchema.pre('save', async function (next) {

@@ -23,15 +23,18 @@ const designationOids = [
 const generateUsers = () => {
 	let users = [];
 
-	for (let i = 0; i < 10000; i++) {
+	for (let i = 0; i < 100; i++) {
+		let firstname = faker.person.firstName(),
+			middlename = faker.person.firstName(),
+			lastname = faker.person.lastName();
+
 		const user = {
-			// _id: { $oid: faker.string.alphanumeric(24) },
-			firstname: faker.person.firstName(),
-			middlename: faker.person.firstName(),
-			lastname: faker.person.lastName(),
-			email: faker.internet.email(),
+			firstname,
+			middlename,
+			lastname,
+			email: `${firstname}${lastname}@gmail.com`,
+			username: `${firstname.toLowerCase()}_${lastname.toLowerCase()}`,
 			contact: faker.string.numeric(10),
-			username: faker.internet.userName(),
 			password: faker.internet.password(),
 			role: faker.helpers.arrayElement(['user', 'admin']),
 			gender: faker.helpers.arrayElement(['male', 'female']),
@@ -42,11 +45,15 @@ const generateUsers = () => {
 			isActive: faker.datatype.boolean(),
 			__v: 0,
 			profileImage: {
-				filename: faker.system.fileName(),
+				filename:
+					faker.system.fileName({ extensionCount: 0 }) +
+					faker.helpers.arrayElement(['.png', '.jpg', '.jpeg']),
 				mimetype: 'image/jpeg',
 			},
 			resume: {
-				filename: faker.system.fileName('resume', 'pdf'),
+				filename:
+					faker.system.fileName({ extensionCount: 0 }) +
+					faker.helpers.arrayElement(['.pdf']),
 				mimetype: 'application/pdf',
 			},
 		};

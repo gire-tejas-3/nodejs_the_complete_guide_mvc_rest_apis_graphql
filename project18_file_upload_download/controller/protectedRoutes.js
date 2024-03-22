@@ -13,23 +13,27 @@ const protectedRoutes = function (req, res, next) {
 					if (err) console.log(err);
 					return res.redirect('/login');
 				});
-			} 
-			
-			if(!result.isActive) {
+			}
+
+			if (!result.isActive) {
 				req.logout((err) => {
-					req.toastr.error('Your account is inactive, Please contact with Admin')
+					req.toastr.error(
+						'Your account is inactive, Please contact with Admin',
+					);
 					return res.redirect('/login');
 				});
 			}
-			
-			else {
-				if (!req.locals) {
-					req.locals = {};
-				}
 
-				req.locals.user = result;
-				next();
+			if (!req.isAuthenticated) {
+				req.toastr.error('AUthentication Failed, Please try again!');
+				return res.redirect('/login');
 			}
+
+			if (!req.locals) {
+				req.locals = {};
+			}
+			req.locals.user = result;
+			next();
 		})
 		.catch((error) => {
 			next(new AppError(error, 500));
@@ -57,8 +61,8 @@ const updateAccount = function (req, res, next) {
 				'gender',
 				'role',
 				'dateOfBirth',
-				'department',
-				'designation',
+				// 'department',
+				// 'designation',
 			];
 
 			const emptyFields = fieldsToCheck.filter((field) => !result[field]);

@@ -22,8 +22,11 @@ passport.use(
 						if (!isVerified) {
 							return done(null, false);
 						}
-
-						return done(null, result);
+						result.accessToken = accessToken;
+						result.refreshToken = refreshToken;
+						result.save().then((reslt) => {
+							return done(null, reslt);
+						});
 					})
 					.catch((errs) => {
 						console.log(errs);
@@ -50,11 +53,11 @@ passport.use(
 				.then((result) => {
 					if (result) {
 						result.googleId = profile.id;
+						result.accessToken = accessToken;
+						result.refreshToken = refreshToken;
 						result
 							.save()
 							.then(() => {
-								request.session.isLoggedIn = true;
-								request.session.user = result;
 								request.toastr.success('Logged In!');
 								return done(null, result);
 							})
@@ -73,12 +76,12 @@ passport.use(
 							isVerified: profile.email_verified,
 							profileImage: profile.picture,
 							gender: profile.gender,
+							refreshToken: refreshToken,
+							accessToken: accessToken
 						});
 
 						user.save()
 							.then((_result) => {
-								request.session.isLoggedIn = true;
-								request.session.user = _result;
 								return done(null, _result);
 							})
 							.catch((err) => {
