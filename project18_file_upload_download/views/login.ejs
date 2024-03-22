@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+	<%- include('includes/head.ejs') %>
+
+	<body>
+		<div id="auth">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-5 col-sm-12 mx-auto">
+						<div class="card pt-4">
+							<div class="card-body">
+								<div class="text-center mb-5">
+									<h3>Sign In</h3>
+								</div>
+								<form action="/login" method="post">
+									<div
+										class="form-group position-relative has-icon-left"
+									>
+										<label for="username">Username</label>
+										<div class="position-relative">
+											<input
+												type="text"
+												class="form-control"
+												id="username"
+												name="username" required
+											/>
+											<div class="form-control-icon">
+												<i class="fa fa-user"></i>
+											</div>
+										</div>
+									</div>
+									<div
+										class="form-group position-relative has-icon-left"
+									>
+										<div class="clearfix">
+											<label for="password"
+												>Password</label
+											>
+											<a href="/reset" class="float-end">
+												<small>Forgot password?</small>
+											</a>
+										</div>
+										<div class="position-relative">
+											<input
+												type="password"
+												class="form-control"
+												id="password"
+												name="password" required
+											/>
+											<div class="form-control-icon">
+												<i class="fa fa-key"></i>
+											</div>
+										</div>
+									</div>
+									<input type="hidden" name="_csrf" value="<%= csrfToken %>">
+									<input type="hidden" name="recaptchaToken" id="recaptchaToken">
+									<div class="clearfix">
+										<button
+											class="btn btn-primary float-end"
+											type="submit"
+											onclick="onClick(event)"
+										>
+											Login
+										</button>
+										<a class="btn" href="/auth/google">
+											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>
+										</a>
+										<a href="/register" class="btn btn-primary float-start">
+											Register
+										</a>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+        <%- include('includes/end.ejs') %>
+	</body>
+</html>
