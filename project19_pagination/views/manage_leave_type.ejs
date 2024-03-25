@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('includes/head.ejs') %>
+
+<body>
+	<div id="app">
+		<%- include('includes/sidebar.ejs') %>
+		<div id="main">
+			<%- include('includes/nav.ejs') %>
+			<div class="main-content container-fluid">
+				<div class="page-title">
+					<div class="row">
+						<div class="col-12 col-md-6 order-md-1 order-last">
+							<h3>Manage Leave Type</h3>
+						</div>
+						<div class="col-12 col-md-6 order-md-2 order-first">
+							<nav aria-label="breadcrumb" class="breadcrumb-header">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item">
+										<a href="/" class="text-success">Dashboard</a>
+									</li>
+									<li class="breadcrumb-item active" aria-current="page">
+										Manage Leave Type
+									</li>
+								</ol>
+							</nav>
+						</div>
+					</div>
+				</div>
+				<section class="section">
+					<div class="card">
+						<div class="card-body">
+							<% if(leaveTypes.length === 0) { %>
+								<p>No Leave Type Found</p>
+							<% } else { %>
+								<table class="table" id="table1">
+									<thead>
+										<tr>
+											<th>Leave Name</th>
+											<th>Description</th>
+											<th>Days Allowed</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<% for(let leaveType of leaveTypes) { %>
+										<form action="/leaves/types/<%= leaveType._id %>" method="post">
+											<tr>
+												<td>
+													<input class="invisible-input" 
+														type="text" name="leaveType" 
+														id="leaveType" 
+														value="<%= leaveType.leaveType %>">
+												</td>
+												<td>
+													<input class="invisible-input" 
+														type="text" name="description" 
+														id="description" 
+														value="<%= leaveType.description %>">
+												</td>
+												<td>
+													<input class="invisible-input" 
+														type="text" name="maxDaysAllowed" 
+														id="maxDaysAllowed" 
+														value="<%= leaveType.maxDaysAllowed %>">
+													
+												</td>
+												<input type="hidden" name="_csrf" value="<%= csrfToken %>">
+												<input type="hidden" name="recaptchaToken" id="recaptchaToken">
+
+												<td>
+													<button class="btn" type="submit" onclick="onClick(event)">
+														<i class="fa fa-pen text-success"></i>
+													</button>
+													
+													<button class="btn" type="submit" formaction="/leaves/types/<%= leaveType._id %>/delete" formmethod="post">
+														<i class="fa fa-trash text-danger"></i>
+													</button>	
+												</td>
+											</tr>
+										</form>
+										<% } %>
+									</tbody>
+								</table>
+							<% } %>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+	<%- include('includes/end.ejs') %>
+</body>
+
+</html>

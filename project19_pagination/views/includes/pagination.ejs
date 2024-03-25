@@ -1,0 +1,133 @@
+<div class="d-flex justify-content-between">
+	<div class="dropdown">
+		<button
+			class="btn btn-secondary dropdown-toggle"
+			type="button"
+			data-bs-toggle="dropdown"
+			aria-expanded="false"
+		>
+			Per Page Item
+		</button>
+		<ul class="dropdown-menu dropdown-menu-dark">
+			<li>
+				<a
+					class="dropdown-item"
+					href="?search=<%= search %>&page=<%= currentPage %>&limit=5&field=<%= field %>&order=<%= order %>"
+					>5</a
+				>
+			</li>
+			<li>
+				<a
+					class="dropdown-item"
+					href="?search=<%= search %>&page=<%= currentPage %>&limit=10&field=<%= field %>&order=<%= order %>"
+					>10</a
+				>
+			</li>
+			<li>
+				<a
+					class="dropdown-item"
+					href="?search=<%= search %>&page=<%= currentPage %>&limit=20&field=<%= field %>&order=<%= order %>"
+					>20</a
+				>
+			</li>
+			<li>
+				<a
+					class="dropdown-item"
+					href="?search=<%= search %>&page=<%= currentPage %>&limit=30&field=<%= field %>&order=<%= order %>"
+					>30</a
+				>
+			</li>
+			<li>
+				<a
+					class="dropdown-item"
+					href="?search=<%= search %>&page=<%= currentPage %>&limit=40&field=<%= field %>&order=<%= order %>"
+					>40</a
+				>
+			</li>
+			<li>
+				<a
+					class="dropdown-item"
+					href="?search=<%= search %>&page=<%= currentPage %>&limit=50&field=<%= field %>&order=<%= order %>"
+					>50</a
+				>
+			</li>
+		</ul>
+	</div>
+	<div aria-label="search">
+		<form
+			class="d-flex"
+			role="search"
+			action="?page=<%= currentPage %>&limit=<%= limit %>&field=<%= field %>&order=<%= order %>&search="
+			method="get"
+		>
+			<input
+				class="form-control me-2"
+				type="search"
+				placeholder="Search"
+				aria-label="Search"
+				name="search"
+			/>
+			<button class="btn btn-outline-success" type="submit">
+				Search
+			</button>
+			<button class="btn btn-outline-success mx-2" type="reset">
+				Reset
+			</button>
+		</form>
+	</div>
+	<div aria-label="pagination">
+		<ul class="pagination">
+			<% if(hasPreviousPage) { %> <% if(previousPage > 2) { %>
+			<li class="page-item">
+				<a
+					class="page-link"
+					href="?search=<%= search %>&page=1&limit=<%= limit %>&field=<%= field %>&order=<%= order %>"
+					>First</a
+				>
+			</li>
+			<% } %>
+			<li class="page-item">
+				<a
+					class="page-link"
+					href="?search=<%= search %>&page=<%= previousPage %>&limit=<%= limit %>&field=<%= field %>&order=<%= order %>"
+					>Previous</a
+				>
+			</li>
+			<li class="page-item">
+				<a
+					class="page-link"
+					href="?search=<%= search %>&page=<%= previousPage %>&limit=<%= limit %>&field=<%= field %>&order=<%= order %>"
+					><%= previousPage %></a
+				>
+			</li>
+			<% } %>
+			<li class="page-item active" aria-current="page">
+				<span class="page-link"><%= currentPage %></span>
+			</li>
+			<% if(hasNextPage) { %>
+			<li class="page-item">
+				<a
+					class="page-link"
+					href="?search=<%= search %>&page=<%= nextPage %>&limit=<%= limit %>&field=<%= field %>&order=<%= order %>"
+					><%= nextPage %></a
+				>
+			</li>
+			<li class="page-item">
+				<a
+					class="page-link"
+					href="?search=<%= search %>&page=<%= nextPage %>&limit=<%= limit %>&field=<%= field %>&order=<%= order %>"
+					>Next</a
+				>
+			</li>
+			<% if(nextPage < totalPages) { %>
+			<li class="page-item">
+				<a
+					class="page-link"
+					href="?search=<%= search %>&page=<%= totalPages %>&limit=<%= limit %>&field=<%= field %>&order=<%= order %>"
+					>Last</a
+				>
+			</li>
+			<% } %> <% } %>
+		</ul>
+	</div>
+</div>

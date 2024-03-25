@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+	<%- include('includes/head.ejs') %>
+
+	<body>
+		<div id="app">
+			<%- include('includes/sidebar.ejs') %>
+			<div id="main">
+				<%- include('includes/nav.ejs') %>
+				<div class="main-content container-fluid">
+					<div class="page-title">
+						<h3>Leave Details</h3>
+					</div>
+					<section id="basic-vertical-layouts">
+						<div class="row match-height">
+							<div class="col-md-12 col-12">
+								<div class="card">
+									<div class="card-content">
+										<div class="card-body">
+											<div class="form-body">
+												<div class="row">
+													<div class="col-12">
+														<table
+															class="table"
+															id="table1"
+														>
+															<tbody>
+																<tr>
+																	<td>
+																		<b>Full Name: </b>
+																		<%= `${leaves.userId.firstname} ${leaves.userId.middlename} ${leaves.userId.lastname}` %>
+																	</td>
+																	<td>
+																		<b>Email: </b>
+																		<%= leaves.userId.email %>
+																	</td>
+																	<td>
+																		<b>Applied Date: </b>
+																		<%= moment(leaves.appliedDate).format('DD MMM YYYY') %>
+																	</td>
+																</tr>
+																<tr>
+																	<td>
+																		<b>Department:</b>
+																		<%= leaves.userId.designation.departmentId.departmentName %>
+																	</td>
+																	<td>
+																		<b>Designation: </b>
+																		<%= leaves.userId.designation.designation %>
+																	</td>
+																	<td>
+																		<b>Leave status:</b>
+																		<%= leaves.status.toUpperCase() %>
+																	</td>
+																</tr>
+																<tr>
+																	<td>
+																		<b>Description:</b>
+																		<%= leaves.description %>
+																	</td>
+																	<td></td>
+																	<td></td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+
+													<div
+														class="col-12 d-flex justify-content-end"
+													>
+														<form
+															action="/leaves/<%= leaves._id %>"
+															method="post"
+														>
+															<input
+																type="hidden"
+																name="status"
+																id="status"
+																value="approved"
+															/>
+															<input type="hidden" name="_csrf" value="<%= csrfToken %>">
+															<input type="hidden" name="recaptchaToken" id="recaptchaToken">
+															<button
+																type="submit"
+																class="btn btn-primary me-1 mb-1"
+																onclick="onClick(event)"
+															>
+																Approve
+															</button>
+														</form>
+														<form
+															action="/leaves/<%= leaves._id %>"
+															method="post"
+														>
+															<input
+																type="hidden"
+																name="status"
+																id="status"
+																value="rejected"
+															/>
+															<input type="hidden" name="_csrf" value="<%= csrfToken %>">
+															<input type="hidden" name="recaptchaToken" id="recaptchaToken">
+															<button
+																type="submit"
+																class="btn btn-primary me-1 mb-1"
+																onclick="onClick(event)"
+															>
+																Reject
+															</button>
+														</form>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+					<!-- // Basic Vertical form layout section end -->
+				</div>
+			</div>
+		</div>
+		<%- include('includes/end.ejs') %>
+	</body>
+</html>

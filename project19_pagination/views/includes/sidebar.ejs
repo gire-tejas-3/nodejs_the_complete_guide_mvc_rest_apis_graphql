@@ -1,0 +1,147 @@
+<div id="sidebar" class="active">
+	<div class="sidebar-wrapper active">
+		<div class="sidebar-header" style=" margin-top: -30px">
+			<i class="fa fa-users text-success me-4"></i>
+			<span>Employee Management System</span>
+		</div>
+		<div class="sidebar-menu">
+			<ul class="menu">
+				<% if(user.role === 'admin') { %>
+					<li class="sidebar-item active">
+						<a href="/dashboard" class="sidebar-link">
+							<i class="fa fa-home text-success"></i>
+							<span>Dashboard</span>
+						</a>
+					</li>
+					<li class="sidebar-item has-sub">
+						<a href="#" class="sidebar-link">
+							<i class="fa fa-building text-success"></i>
+							<span>Department</span>
+						</a>
+						<ul class="submenu">
+							<li>
+								<a href="/department/add">Add Department</a>
+							</li>
+							<li>
+								<a href="/department"
+									>Manage Department</a
+								>
+							</li>
+						</ul>
+					</li>
+					<li class="sidebar-item has-sub">
+						<a href="#" class="sidebar-link">
+							<i class="fa fa-table text-success"></i>
+							<span>Designation</span>
+						</a>
+						<ul class="submenu">
+							<li>
+								<a href="/designation/add">Add Designation</a>
+							</li>
+							<li>
+								<a href="/designation"
+									>Manage Designation</a
+								>
+							</li>
+						</ul>
+					</li>
+					<!-- <li class="sidebar-item has-sub">
+						<a href="#" class="sidebar-link">
+							<i class="fa fa-users text-success"></i>
+							<span>Employees</span>
+						</a>
+						<ul class="submenu">
+							<li>
+								<a href="/employees/add">Add Employee</a>
+							</li>
+							<li>
+								<a href="/employees">Manage Employee</a>
+							</li>
+						</ul>
+					</li> -->
+					<li class="sidebar-item has-sub">
+						<a href="#" class="sidebar-link">
+							<i class="fa fa-table text-success"></i>
+							<span>Leave Type</span>
+						</a>
+						<ul class="submenu">
+							<li>
+								<a href="/leaves/types/add">Add Leave Type</a>
+							</li>
+							<li>
+								<a href="/leaves/types"
+									>Manage Leave Type</a
+								>
+							</li>
+						</ul>
+					</li>
+					<li class="sidebar-item has-sub">
+						<a href="#" class="sidebar-link">
+							<i class="fa fa-table text-success"></i>
+							<span>Leave Management</span>
+						</a>
+						<ul class="submenu">
+							<li>
+								<a href="/leaves">All Leaves</a>
+							</li>
+							<li>
+								<a href="/leaves/pending">Pending Leaves</a>
+							</li>
+							<li>
+								<a href="/leaves/approved">Approve Leaves</a>
+							</li>
+							<li>
+								<a href="/leaves/rejected"
+									>Not Approve Leaves</a
+								>
+							</li>
+						</ul>
+					</li>
+					<li class="sidebar-item has-sub">
+						<a href="#" class="sidebar-link">
+							<i class="fa fa-user text-success"></i>
+							<span>Users</span>
+						</a>
+						<ul class="submenu">
+							<li>
+								<a href="/user/add">Add User</a>
+							</li>
+							<li>
+								<a href="/user">Manage Users</a>
+							</li>
+						</ul>
+					</li>
+					<!-- <li class="sidebar-item">
+						<a href="/reports" class="sidebar-link">
+							<i class="fa fa-chart-bar text-success"></i>
+							<span>Reports</span>
+						</a>
+					</li> -->
+				<% } else { %>
+					<li class="sidebar-item active">
+						<a href="/" class="sidebar-link">
+							<i class="fa fa-home text-success"></i>
+							<span>Dashboard</span>
+						</a>
+					</li>
+					<!-- user -->
+					<li class="sidebar-item">
+						<a href="/leave/apply" class="sidebar-link">
+							<i class="fa fa-plane text-success"></i>
+							<span>Apply Leave</span>
+						</a>
+					</li>
+					<li class="sidebar-item">
+						<a href="/leave" class="sidebar-link">
+							<i class="fa fa-plane text-success"></i>
+							<span>Leave Status</span>
+						</a>
+					</li>
+				<% } %>
+			</ul>
+		</div>
+		<button class="sidebar-toggler btn x">
+			<i data-feather="x"></i>
+		</button>
+	</div>
+</div>

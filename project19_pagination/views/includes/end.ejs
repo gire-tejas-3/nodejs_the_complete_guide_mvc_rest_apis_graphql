@@ -1,0 +1,38 @@
+<script src="/assets/js/toastr.min.js"></script>
+<script src="/assets/js/feather-icons/feather.min.js"></script>
+<script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="/assets/js/app.js"></script>
+<script src="/assets/vendors/chartjs/Chart.min.js"></script>
+<script src="/assets/vendors/apexcharts/apexcharts.min.js"></script>
+<script src="/assets/js/pages/dashboard.js"></script>
+<script src="/assets/js/main.js"></script>
+<script src="/assets/vendors/simple-datatables/simple-datatables.js"></script>
+<script type="text/javascript">
+	toastr.options = {
+		positionClass: 'toast-top-right',
+		preventDuplicates: true,
+		showDuration: '1000',
+		hideDuration: '1000',
+		timeOut: '3000',
+		extendedTimeOut: '1000',
+	};
+</script>
+<script src="https://www.google.com/recaptcha/api.js?render=<%= recaptcha %>"></script>
+<script>
+	function onClick(e) {
+		e.preventDefault();
+		grecaptcha.ready(function () {
+			grecaptcha
+				.execute('<%= recaptcha %>', { action: 'submit' })
+				.then(function (token) {
+					document.getElementById('recaptchaToken').value = token;
+					e.target.form.submit();
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		});
+	}
+</script>
+
+<%- toasts %>
